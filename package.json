@@ -30,6 +30,8 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.2.2",
     "@lukeed/uuid": "^2.0.0",
+    "@supabase/supabase-js": "^1.14.0",
+    "@supabase/ui": "^0.27.2",
     "cookie": "^0.4.1"
   },
   "volta": {
