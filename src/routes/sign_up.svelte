@@ -4,7 +4,6 @@
     const SUPABASE_URL = "https://zyujhjqnioinakawkpfu.supabase.co"
 
     import { createClient } from '@supabase/supabase-js'
-
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let password = '';
@@ -13,12 +12,11 @@
     let lastName = '';
     
     async function signUp(){
-        const { user, error } = await supabase.auth.signUp({
+        const { user, session, error } = await supabase.auth.signUp({
             email: email,
             password: password
         })
-        console.log(user,error)
-        resetParameters()
+        console.log('Done')
     }
 
     /*async function saveData(){
@@ -26,15 +24,8 @@
         .from('users')
         .insert([
         { firstName: firstName, lastName: lastName }
-  ])
+        ])
     }*/
-
-    async function resetParameters(){
-        password = '';
-        email = '';
-        firstName = '';
-        lastName = '';
-    }
 </script>
 
 <div class="container login-container">
