@@ -1,4 +1,6 @@
 <script>
+import { session } from '$app/stores';
+
     
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMzA1OTI4NSwiZXhwIjoxOTM4NjM1Mjg1fQ.9OiUIjKysUqWz_Y2IToCtMz6Wim2PdM1kq0HalmGsec'
     const SUPABASE_URL = "https://zyujhjqnioinakawkpfu.supabase.co"
@@ -19,13 +21,13 @@
         console.log('Done')
     }
 
-    /*async function saveData(){
+    async function saveData(){
         const { data, error } = await supabase
         .from('users')
         .insert([
         { firstName: firstName, lastName: lastName }
         ])
-    }*/
+    }
 </script>
 
 <div class="container login-container">
@@ -46,7 +48,7 @@
                     <input bind:value={password} type="text" class="form-control" placeholder="Gebe hier dein Passwort ein">
                 </div>
                 <div class="form-group">
-                    <button on:click={signUp}>Registrieren</button>
+                    <button on:click={saveData} on:click={signUp}>Registrieren</button>
                 </div>
             </form>
         </div>
