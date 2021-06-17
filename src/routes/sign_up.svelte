@@ -24,10 +24,24 @@ import { session } from '$app/stores';
     async function saveData(){
         const { data, error } = await supabase
         .from('users')
-        .insert([
-        { firstName: firstName, lastName: lastName }
-        ])
+        .insert([{   
+            firstName: firstName, 
+            lastName: lastName 
+        }])
     }
+
+    function checkCredentials(){
+        // check name
+        if (firstName !== '' && 
+            lastName !== '' &&
+            email !== '' &&
+            password !== '')
+        {
+            saveData();
+            signUp();
+        }
+    }
+
 </script>
 
 <div class="container login-container">
@@ -36,19 +50,19 @@ import { session } from '$app/stores';
             <h3>Registrieren</h3>
             <form>
                 <div class="form-group">
-                    <input bind:value={firstName} type="text" class="form-control" placeholder="Vorname">
+                    <input bind:value={firstName} type="text" minlength="1" class="form-control" placeholder="Vorname" required>
                 </div>
                 <div class="form-group">
-                    <input bind:value={lastName} type="text" class="form-control" placeholder="Nachname">
+                    <input bind:value={lastName} type="text" minlength="1" class="form-control" placeholder="Nachname" required>
                 </div>
                 <div class="form-group">
-                    <input bind:value={email} type="text" class="form-control" placeholder="Gebe hier deine Email ein">
+                    <input bind:value={email} type="email" class="form-control" placeholder="Gebe hier deine Email ein" required>
                 </div>
                 <div class="form-group">
-                    <input bind:value={password} type="text" class="form-control" placeholder="Gebe hier dein Passwort ein">
+                    <input bind:value={password} type="password" minlength="6" class="form-control" placeholder="Das Passwort muss mindestens 6 Charakter haben" required>
                 </div>
                 <div class="form-group">
-                    <button on:click={saveData} on:click={signUp}>Registrieren</button>
+                    <button on:click={checkCredentials}>Registrieren</button>
                 </div>
             </form>
         </div>
