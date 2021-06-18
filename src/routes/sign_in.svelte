@@ -1,23 +1,29 @@
-<script>
-    
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMzA1OTI4NSwiZXhwIjoxOTM4NjM1Mjg1fQ.9OiUIjKysUqWz_Y2IToCtMz6Wim2PdM1kq0HalmGsec'
-    const SUPABASE_URL = "https://zyujhjqnioinakawkpfu.supabase.co"
+<script lang="ts">
+    import { supabase } from '$lib/Services/supabase';
+    import { auth, users } from '$lib/Services/supabase';
+    import { session } from '$app/stores';
 
-    import { createClient } from '@supabase/supabase-js'
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    let email = '';
+	let email = '';
     let password = '';
+    let authentication;
+    let authenticatedUser;
     
     async function signIn(){
         const { user, session, error } = await supabase.auth.signIn({
             email: email,
-            password: password,
-        }) 
+            password: password
+        })
+        
+        if (authenticatedUser !== undefined) window.location.href='/about'
     }
-</script>
 
+    function dumbSignIn(){
+        authentication = $auth;
+        authenticatedUser = $users;
+        signIn();
+    }
+    
+</script>
 
 <div class="container login-container">
     <div class="row">
@@ -25,13 +31,13 @@
             <h3>Login</h3>
             <form>
                 <div class="form-group">
-                    <input bind:value={email} type="text" class="form-control" placeholder="Gebe hier deine Email ein">
+                    <input bind:value={email} type="email" class="form-control" placeholder="Gebe hier deine Email ein">
                 </div>
                 <div class="form-group">
-                    <input bind:value={password} type="text" class="form-control" placeholder="Gebe hier dein Passwort ein">
+                    <input bind:value={password} type="password" class="form-control" placeholder="Gebe hier dein Passwort ein">
                 </div>
                 <div class="form-group">
-                    <button on:click={signIn}>Einloggen</button>
+                    <button on:click={dumbSignIn}>Einloggen</button>
                 </div>
                 <div class="form-group">
                     <a href="/sign_up" class="ForgetPwd">Sie sind noch nicht registriert?</a>

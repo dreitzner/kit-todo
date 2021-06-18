@@ -1,12 +1,7 @@
-<script>
-import { session } from '$app/stores';
-
+<script lang="ts">
     
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyMzA1OTI4NSwiZXhwIjoxOTM4NjM1Mjg1fQ.9OiUIjKysUqWz_Y2IToCtMz6Wim2PdM1kq0HalmGsec'
-    const SUPABASE_URL = "https://zyujhjqnioinakawkpfu.supabase.co"
-
-    import { createClient } from '@supabase/supabase-js'
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    import { supabase } from '$lib/Services/supabase'
+    import { session } from '$app/stores'
 
     let password = '';
     let email = '';
@@ -14,11 +9,11 @@ import { session } from '$app/stores';
     let lastName = '';
     
     async function signUp(){
-        const { user, session, error } = await supabase.auth.signUp({
+        const { user, session: sesh, error } = await supabase.auth.signUp({
             email: email,
             password: password
         })
-        console.log('Done')
+        if (error) alert(error.message)
     }
 
     async function saveData(){

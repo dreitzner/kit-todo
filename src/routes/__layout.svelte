@@ -1,6 +1,11 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
+	import { session } from '$app/stores'
+	import { browser } from '$app/env'
+	import { goto } from '$app/navigation';
+	import { supabase } from '$lib/Services/supabase'
+			
 </script>
 
 <Header />
