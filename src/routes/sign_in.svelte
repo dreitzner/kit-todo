@@ -19,7 +19,7 @@
 </script>
 
 
-<div class="container login-container">
+<div class="container login-container text-white">
     <div class="row">
         <div class="col-md-6 login-form">
             <h3>Login</h3>
@@ -31,7 +31,7 @@
                     <input bind:value={password} type="text" class="form-control" placeholder="Gebe hier dein Passwort ein">
                 </div>
                 <div class="form-group">
-                    <button on:click={signIn}>Einloggen</button>
+                    <button class="btn" on:click={signIn}>Einloggen</button>
                 </div>
                 <div class="form-group">
                     <a href="/sign_up" class="ForgetPwd">Sie sind noch nicht registriert?</a>

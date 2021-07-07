@@ -44,27 +44,47 @@ import { session } from '$app/stores';
 
 </script>
 
-<div class="container login-container">
-    <div class="row">
-        <div class="col-md-6 login-form">
-            <h3>Registrieren</h3>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-8">
+        <div class="card darkgrey text-white">
+        <div class="card-body">
+            <h1>Register</h1>
             <form>
-                <div class="form-group">
-                    <input bind:value={firstName} type="text" minlength="1" class="form-control" placeholder="Vorname" required>
-                </div>
-                <div class="form-group">
-                    <input bind:value={lastName} type="text" minlength="1" class="form-control" placeholder="Nachname" required>
-                </div>
-                <div class="form-group">
-                    <input bind:value={email} type="email" class="form-control" placeholder="Gebe hier deine Email ein" required>
-                </div>
-                <div class="form-group">
-                    <input bind:value={password} type="password" minlength="6" class="form-control" placeholder="Das Passwort muss mindestens 6 Charakter haben" required>
-                </div>
-                <div class="form-group">
-                    <button on:click={checkCredentials}>Registrieren</button>
-                </div>
+            <div class="form-group">
+                <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+                <input bind:value={lastName} type="text" minlength="1" class="form-control lightgrey" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <input bind:value={email} type="email" class="form-control lightgrey" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input bind:value={password} type="password" minlength="6" class="form-control lightgrey" placeholder="Password" required>
+            </div>
+            <div>
+                <button type="button" class="btn" on:click={checkCredentials}>Register</button>
+            </div>
+            <div class="mx-auto" style="width: 128px;">
+                <a href="/sign_in">Go back to Log-In</a>
+            </div>
             </form>
         </div>
+        </div>
     </div>
+    <div class="col"></div>
 </div>
+
+<style>
+    
+    .form-group{
+        display: block;
+        margin: 1.2rem auto 0 auto;
+        width: 65%;
+    }
+    .card-body{
+        margin: 5%;
+    }
+
+</style>
