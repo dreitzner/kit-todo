@@ -46,10 +46,10 @@ import { session } from '$app/stores';
 
 <div class="row">
     <div class="col"></div>
-    <div class="col-12 col-sm-8">
+    <div class="col-12 col-sm-6">
         <div class="card darkgrey text-white">
         <div class="card-body">
-            <h1>Register</h1>
+            <h1 class="mb-5">Register</h1>
             <form>
             <div class="form-group">
                 <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey" placeholder="First Name" required>
@@ -67,7 +67,7 @@ import { session } from '$app/stores';
                 <button type="button" class="btn" on:click={checkCredentials}>Register</button>
             </div>
             <div class="mx-auto" style="width: 128px;">
-                <a href="/sign_in">Go back to Log-In</a>
+                <a href="/">Go back to Log-In</a>
             </div>
             </form>
         </div>

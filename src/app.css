@@ -17,6 +17,7 @@
 }
 
 body {
+	color: white;
 	min-height: 100vh;
 	margin: 0;
 	background: #1a1a1a;
@@ -30,7 +31,6 @@ body {
 
 h1 {
  	font-size: 18pt;
-	margin-bottom: 40px;
  	text-align: center;
 }
 

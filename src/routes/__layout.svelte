@@ -3,8 +3,6 @@
 	import '../app.css';
 </script>
 
-<Header />
-
 <main>
 	<slot />
 </main>
@@ -15,9 +13,8 @@
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
+		width: auto;
+		margin: 0 7rem;
 		box-sizing: border-box;
 	}
 	
