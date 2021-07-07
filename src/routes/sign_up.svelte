@@ -46,22 +46,22 @@ import { session } from '$app/stores';
 
 <div class="row">
     <div class="col"></div>
-    <div class="col-12 col-sm-6">
+    <div class="col-12 col-lg-6">
         <div class="card darkgrey text-white">
-        <div class="card-body">
+        <div class="card-body m-4">
             <h1 class="mb-5">Register</h1>
             <form>
-            <div class="form-group">
-                <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey" placeholder="First Name" required>
+            <div class="form-group d-block">
+                <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey py-3" placeholder="First Name" required>
             </div>
-            <div class="form-group">
-                <input bind:value={lastName} type="text" minlength="1" class="form-control lightgrey" placeholder="Last Name" required>
+            <div class="form-group d-block">
+                <input bind:value={lastName} type="text" minlength="1" class="form-control lightgrey py-3" placeholder="Last Name" required>
             </div>
-            <div class="form-group">
-                <input bind:value={email} type="email" class="form-control lightgrey" placeholder="Email" required>
+            <div class="form-group d-block">
+                <input bind:value={email} type="email" class="form-control lightgrey py-3" placeholder="Email" required>
             </div>
-            <div class="form-group">
-                <input bind:value={password} type="password" minlength="6" class="form-control lightgrey" placeholder="Password" required>
+            <div class="form-group d-block">
+                <input bind:value={password} type="password" minlength="6" class="form-control lightgrey py-3" placeholder="Password" required>
             </div>
             <div>
                 <button type="button" class="btn" on:click={checkCredentials}>Register</button>
@@ -78,17 +78,13 @@ import { session } from '$app/stores';
 
 <style> 
     .form-group{
-        display: block;
-        margin: 1.2rem auto 0 auto;
+        margin: 1.3rem auto 0 auto;
         width: 65%;
     }
-    .card-body{
-        margin: 5%;
-    }
-    @media (max-width: 767.98px) {
+    @media (max-width: 991.98px) {
         .form-group{
             width: 100%;
-            margin: 1.2rem  0;
+            margin: 1.3rem  0;
         }
     }
 

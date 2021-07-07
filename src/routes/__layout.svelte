@@ -17,5 +17,11 @@
 		margin: 0 7rem;
 		box-sizing: border-box;
 	}
+
+	@media (max-width: 991.98px) { 
+		main {
+			margin: 0;
+		}
+	}
 	
 </style>
