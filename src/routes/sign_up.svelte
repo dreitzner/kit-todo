@@ -46,7 +46,7 @@ import { session } from '$app/stores';
 
 <div class="row">
     <div class="col"></div>
-    <div class="col-8">
+    <div class="col-12 col-sm-8">
         <div class="card darkgrey text-white">
         <div class="card-body">
             <h1>Register</h1>
@@ -76,8 +76,7 @@ import { session } from '$app/stores';
     <div class="col"></div>
 </div>
 
-<style>
-    
+<style> 
     .form-group{
         display: block;
         margin: 1.2rem auto 0 auto;
@@ -85,6 +84,12 @@ import { session } from '$app/stores';
     }
     .card-body{
         margin: 5%;
+    }
+    @media (max-width: 767.98px) {
+        .form-group{
+            width: 100%;
+            margin: 1.2rem  0;
+        }
     }
 
 </style>
