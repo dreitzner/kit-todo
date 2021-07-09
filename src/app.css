@@ -48,7 +48,9 @@ a:hover {
 }
 
 h2 {
-	font-size: 1rem;
+	font-weight: normal;
+	margin: 0;
+	font-size: 16pt;
 }
 
 pre {
@@ -84,12 +86,20 @@ button:focus:not(:focus-visible) {
 	background-color: #185abe;
 }
 
-.btn {
+.btn-blue {
 	background-color: #185abe;
 	color: white;
 	display: block;
 	padding: 6px 18px;
 	margin: 40px auto;
+}
+
+.btn-white {
+	background-color: white;
+	color: #185abe;
+	display: block;
+	width: 100%;
+	padding: 6px;
 }
 
 .card {

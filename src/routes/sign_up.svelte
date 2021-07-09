@@ -64,7 +64,7 @@ import { session } from '$app/stores';
                 <input bind:value={password} type="password" minlength="6" class="form-control lightgrey py-3" placeholder="Password" required>
             </div>
             <div>
-                <button type="button" class="btn" on:click={checkCredentials}>Register</button>
+                <button type="button" class="btn btn-blue" on:click={checkCredentials}>Register</button>
             </div>
             <div class="mx-auto w-25">
                 <a href="/">Go back to Log-In</a>
