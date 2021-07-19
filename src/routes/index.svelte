@@ -19,7 +19,7 @@
     let password = '';
     
     async function signIn(){
-        const { user, session, error } = await supabase.auth.signIn({
+        const { user, error } = await supabase.auth.signIn({
             email: email,
             password: password,
         }) 

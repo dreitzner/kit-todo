@@ -14,30 +14,19 @@ import { session } from '$app/stores';
     let lastName = '';
     
     async function signUp(){
-        const { user, session, error } = await supabase.auth.signUp({
+        const { user, error } = await supabase.auth.signUp({
             email: email,
             password: password
         })
         console.log('Done')
     }
 
-    async function saveData(){
-        const { data, error } = await supabase
-        .from('users')
-        .insert([{   
-            firstName: firstName, 
-            lastName: lastName 
-        }])
-    }
-
     function checkCredentials(){
-        // check name
         if (firstName !== '' && 
             lastName !== '' &&
             email !== '' &&
             password !== '')
         {
-            saveData();
             signUp();
         }
     }
