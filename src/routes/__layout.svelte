@@ -1,9 +1,19 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
+	import { onMount } from 'svelte';
+
+	let toDo;
+
+  	onMount(() => {
+    	toDo = window.location.pathname;
+  	})
+
 </script>
 
+{#if toDo == '/to-do'}
 <Header />
+{/if}
 
 <main>
 	<slot />
