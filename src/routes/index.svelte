@@ -47,8 +47,8 @@
                 <div class="form-group d-block">
                     <button class="btn btn-blue" on:click={signIn}>Log In</button>
                 </div>
-                <div class="mx-auto w-50">
-                    <a href="/sign_up" class="ForgetPwd">You haven't made an account yet? Sign Up here</a>
+                <div class="mx-auto w-50 text-center">
+                    <a href="/sign_up">You haven't made an account yet? Sign Up here</a>
                 </div>
             </form>
 		</div>

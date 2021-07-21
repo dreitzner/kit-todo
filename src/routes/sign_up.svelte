@@ -66,7 +66,7 @@ import { session } from '$app/stores';
             <div>
                 <button type="button" class="btn btn-blue" on:click={checkCredentials}>Register</button>
             </div>
-            <div class="mx-auto w-25">
+            <div class="mx-auto w-25 text-center">
                 <a href="/">Go back to Log-In</a>
             </div>
             </form>
