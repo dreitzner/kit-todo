@@ -1,4 +1,6 @@
 <script>
+    import TodoEntry from '$lib/TodoEntry/index.svelte';
+
     let priotity = "High Priority";
     let priorities = ["High Priority", "Medium Priority", "Low Priority"];
 </script>
@@ -15,6 +17,8 @@
                 {/each}
             </select>
             <button class="btn btn-white">+</button>
+            <TodoEntry />
+            <TodoEntry />
         </div>
     </div>
     <div class="col card prio darkgrey mr-3 visibleLg">
