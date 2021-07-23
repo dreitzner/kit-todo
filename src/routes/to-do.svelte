@@ -1,5 +1,4 @@
 <script>
-    let priotity = "High Priority";
     let priorities = ["High Priority", "Medium Priority", "Low Priority"];
 </script>
 
