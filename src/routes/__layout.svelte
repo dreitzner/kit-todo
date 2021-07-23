@@ -1,7 +1,19 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
+	import { onMount } from 'svelte';
+
+	let toDo;
+
+  	onMount(() => {
+    	toDo = window.location.pathname;
+  	})
+
 </script>
+
+{#if toDo == '/to-do'}
+<Header />
+{/if}
 
 <main>
 	<slot />
@@ -14,7 +26,7 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: auto;
-		margin: 0 7rem;
+		margin: 0 0.6rem;
 		box-sizing: border-box;
 	}
 
