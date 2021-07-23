@@ -12,18 +12,36 @@
     const SUPABASE_URL = "https://zyujhjqnioinakawkpfu.supabase.co"
 
     import { createClient } from '@supabase/supabase-js'
+    import { onMount } from 'svelte';
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let email = '';
-    let password = '';
+    let email, password, error
     
     async function signIn(){
-        const { user, error } = await supabase.auth.signIn({
+        const { user, session, error:er } = await supabase.auth.signIn({
             email: email,
             password: password,
-        }) 
+        }, {
+            redirectTo: 'http://localhost:3000/to-do'
+        })
+        if(er) error = 'Invalid credentials!';
     }
+
+    onMount(async () => {
+        var forms = document.getElementsByClassName('needs-validation');
+
+        var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+        });
+    });
+
 </script>
 
 
@@ -37,15 +55,26 @@
 		<div class="card darkgrey text-white h-100">
 		<div class="card-body">
         	<h1 class="mb-5">Log-In</h1>
-            <form>
+            <form class="needs-validation" novalidate>
+                {#if error}
+                    <div class="form-group d-block text-center">
+                        <div class="text-danger">{error}</div>
+                    </div>
+                {/if}
                 <div class="form-group d-block">
-                    <input bind:value={email} type="text" class="form-control lightgrey py-3" placeholder="Email">
+                    <input bind:value={email} type="email" class="form-control lightgrey py-3" placeholder="Email" required>
+                    <div class="invalid-feedback">
+                        Please enter your email adress.
+                    </div>
                 </div>
                 <div class="form-group d-block">
-                    <input bind:value={password} type="text" class="form-control lightgrey py-3" placeholder="Password">
+                    <input bind:value={password} type="password" class="form-control lightgrey py-3" placeholder="Password" required>
+                    <div class="invalid-feedback">
+                        Please enter your password.
+                    </div>
                 </div>
                 <div class="form-group d-block">
-                    <button class="btn btn-blue" on:click={signIn}>Log In</button>
+                    <button class="btn btn-blue" type="submit" on:click={signIn}>Sign In</button>
                 </div>
                 <div class="mx-auto w-50 text-center">
                     <a href="/sign_up">You haven't made an account yet? Sign Up here</a>
