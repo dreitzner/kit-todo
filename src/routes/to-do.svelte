@@ -15,7 +15,8 @@
                     </option>
                 {/each}
             </select>
-            <button class="btn btn-white">+</button>
+            <button class="btn btn-white mb-3">+</button>
+            <TodoEntry />
             <TodoEntry />
             <TodoEntry />
         </div>
@@ -23,13 +24,22 @@
     <div class="col card prio darkgrey mr-3 visibleLg">
         <div class="card-body">        
             <h2 class="text-center mb-3">Medium Priority</h2>
-            <button class="btn btn-white">+</button>
+            <button class="btn btn-white mb-3">+</button>
+            <TodoEntry />
+            <TodoEntry />
+            <TodoEntry />
+            <TodoEntry />
         </div>
     </div>
     <div class="col card prio darkgrey visibleLg">
         <div class="card-body">        
             <h2 class="text-center mb-3">Low Priority</h2>
-            <button class="btn btn-white">+</button>
+            <button class="btn btn-white mb-3">+</button>
+            <TodoEntry />
+            <TodoEntry />
+            <TodoEntry />
+            <TodoEntry />
+            <TodoEntry />
         </div>
     </div>
 </div>
@@ -41,7 +51,7 @@
         font-size: 16pt;
     }
     .prio{
-        height: 90vh;
+        min-height: 90vh;
     }
 
     .visibleSm {

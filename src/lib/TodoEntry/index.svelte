@@ -1,7 +1,7 @@
 <script lang="ts">
 	let todoTitle = "Title";
-	let todoBody = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati eum excepturi ullam animi alias ducimus, saepe accusantium! Consequuntur asperiores quidem, a excepturi, doloremque dolor tenetur omnis, et blanditiis quia odit!";
-	let date = "Due: 12.03.22";
+	let todoBody = "Lorem ipsum, dolor sit amet consectetur adipisicing elit.";
+	let date = "Due till: 12.03.22";
 
 	//for self destruction
 	let nodeRef;
@@ -13,19 +13,18 @@
 	}
 
 	function deleteTask() {
-		let elem = this.closest('.card');
-		elem.style.animation = 'fading 0.5s forwards';
+		let elem = this.closest('div.card');
+		elem.classList.add('deleteAnim');
 		setTimeout(() => {
+			console.log(nodeRef);
 			nodeRef.parentNode.removeChild(nodeRef);
-		}, 350);
+		}, 600);
 	}
 </script>
 
-<!-- <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet"> -->
-
 <div class="{isDone ? 'card done' : 'card'}" bind:this={nodeRef}>
 	<div class="card-header">
-		{todoTitle}
+		<h2>{todoTitle}</h2>
 	</div>
 	<div class="card-body">
 		{todoBody}
@@ -47,9 +46,8 @@
 	</div>
 </div>
 
-
-<!-- <i class="fas fa-check"></i>
-<i class="fas fa-trash"></i> -->
+/*delete if there is a css anim workaround*/
+<div class="deleteAnim"></div>
 
 <style>
 	.card {
@@ -74,6 +72,10 @@
 		font-weight: bold;
 	}
 
+	.card-header h2 {
+		color: var(--darkblue);
+	}
+
 	.card-footer {
 		padding-top: 0px;
 		border: none;
@@ -85,7 +87,7 @@
 	}
 
 	button img:hover {
-		filter: brightness(-10);
+		filter: brightness(0.9);
 	}
 
 	.btn {
@@ -96,7 +98,6 @@
 	}
 
 	.btn-del {
-		border: solid grey 1px;
 		background-color: transparent;
 		margin-left: 10px;
 		transition: border-color 0.4s;
@@ -128,12 +129,21 @@
 		margin-bottom: 0px;
 	}
 
-	@keyframes fading {
+	.deleteAnim {
+		animation: deleteAnim 0.5s forwards;
+		transform-origin: top;
+	}
+
+	@keyframes deleteAnim {
 		0% {
 			transform: scale(1);
+			max-height: 500px;
+			opacity: 1;
 		}
 		100% {
 			transform: scale(0);
+			max-height: 0px;
+			opacity: 0;
 		}
 	}
 </style>
