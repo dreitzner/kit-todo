@@ -8,7 +8,7 @@
 
 <script>
     
-    import { supabase } from '$lib/db'
+    import supabase from "$lib/db"
     import { onMount } from 'svelte';
 
     let email, password, error
