@@ -14,7 +14,7 @@
 
 	function deleteTask() {
 		let elem = this.closest('.card');
-		elem.classList.add('fade');
+		elem.style.animation = 'fading 0.5s forwards';
 		setTimeout(() => {
 			nodeRef.parentNode.removeChild(nodeRef);
 		}, 350);
@@ -128,11 +128,7 @@
 		margin-bottom: 0px;
 	}
 
-	.fade {
-		animation: getsmall 0.5s forwards;
-	}
-
-	@keyframes getsmall {
+	@keyframes fading {
 		0% {
 			transform: scale(1);
 		}
