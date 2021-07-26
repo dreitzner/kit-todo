@@ -1,5 +1,9 @@
 <script lang="ts">
+	    import supabase from "$lib/db"
 
+		async function signOut(){
+        	const {error} = await supabase.auth.signOut()
+    	}
 </script>
 
 <header class="darkblue">
@@ -10,7 +14,7 @@
 			</div>
 			<h2 class="nav-item ml-3 mr-auto align-self-center visibleLg">My To-Do-List</h2>
 			<h2 class="nav-item ml-3 align-self-center visibleLg">Hallo Username</h2>
-			<a class="nav item ml-3 nav-link align-self-center" href="/">Log-Out</a>
+			<a class="nav item ml-3 nav-link align-self-center" href="/" on:click={signOut}>Log-Out</a>
 		</div>
 	</nav>
 </header>

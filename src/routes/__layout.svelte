@@ -2,16 +2,40 @@
 	import Header from '$lib/Header/index.svelte';
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { session } from '$app/stores'
+	import { browser } from '$app/env'
+	import { goto } from '$app/navigation'
+	import supabase from "$lib/db"
 
-	let toDo;
+	let showHeader;
 
   	onMount(() => {
-    	toDo = window.location.pathname;
+    	showHeader = window.location.pathname;
   	})
+
+	if(browser) {
+		$session = supabase.auth.session();
+		setTimeout( () => $session ? goto('/to-do') : goto('/'));
+		supabase.auth.onAuthStateChange((event, sesh) => {
+			$session = sesh;
+			setTimeout( () => $session ? goToToDo() : goToToSignIn());
+		})
+	}
+
+	function goToToDo() {
+		goto('/to-do');
+		showHeader = '/to-do';
+	}
+
+	function goToToSignIn() {
+		goto('/');
+		showHeader = '/';
+	}
+
 
 </script>
 
-{#if toDo == '/to-do'}
+{#if showHeader == '/to-do'}
 <Header />
 {/if}
 

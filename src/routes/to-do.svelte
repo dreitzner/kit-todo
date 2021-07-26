@@ -1,5 +1,20 @@
 <script>
+    import supabase from "$lib/db"
+
     let priorities = ["High Priority", "Medium Priority", "Low Priority"];
+
+    async function getEntries() {
+        const entries = await supabase.from('entries').select(`*`);
+    }
+
+    /*async function createEntry() {
+        const newEntry = await supabase.from('entries').insert({key:value});
+    }*/
+
+    /*async function updateEntry() {
+        const newEntry = await supabase.from('entries').eq('selector').update({ key: value })
+    }*/
+
 </script>
 
 <div class="row my-2">
