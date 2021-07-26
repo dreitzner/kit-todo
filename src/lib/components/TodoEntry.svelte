@@ -1,28 +1,28 @@
 <script lang="ts">
-	let todoTitle = "Title";
-	let todoBody = "Lorem ipsum, dolor sit amet consectetur adipisicing elit.";
-	let date = "Due till: 12.03.22";
+	export let id;
+	export let todoTitle = "Title";
+	export let todoBody = "Lorem ipsum, dolor sit amet consectetur adipisicing elit.";
+	export let date = "12.03.22";
+	export let removeFunction;
 
 	//for self destruction
 	let nodeRef;
-
-	let isDone = false;
+	let deleteAnim;
+	export let isDone = false;
 
 	function Taskdone() {
 		isDone = true;
 	}
 
 	function deleteTask() {
-		let elem = this.closest('div.card');
-		elem.classList.add('deleteAnim');
+		deleteAnim = true;
 		setTimeout(() => {
-			console.log(nodeRef);
-			nodeRef.parentNode.removeChild(nodeRef);
+			removeFunction(id);
 		}, 600);
 	}
 </script>
 
-<div class="{isDone ? 'card done' : 'card'}" bind:this={nodeRef}>
+<div class="card" class:isDone class:deleteAnim bind:this={nodeRef}>
 	<div class="card-header">
 		<h2>{todoTitle}</h2>
 	</div>
@@ -30,7 +30,7 @@
 		{todoBody}
 	</div>
 	<div class="card-footer vcenter-item">
-		<p class="date">{date}</p>
+		<p class="date">Due till: {date}</p>
 		<div class="options vcenter-item">
 			{#if isDone}
 				<p class="doneInfo">Task Done</p>
@@ -46,9 +46,6 @@
 	</div>
 </div>
 
-/*delete if there is a css anim workaround*/
-<div class="deleteAnim"></div>
-
 <style>
 	.card {
 		color: black;
@@ -56,13 +53,14 @@
 		border: none;
 	}
 
-	.card.done::before {
+	.card.isDone::before {
 		content: '';
 		background-color: rgba(0, 0, 0, 0.5);
 		border-radius: 10px;
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		transition: all 0.4s;
 	}
 
 	.card-header {
