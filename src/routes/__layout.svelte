@@ -41,7 +41,6 @@
 
 <main>
 	<slot />
-	<div>{JSON.stringify($session, null, 2)}</div>
 </main>
 
 <style>
