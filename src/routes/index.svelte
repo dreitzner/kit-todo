@@ -15,10 +15,8 @@
     
     async function signIn(){
         const { user, session, error:er } = await supabase.auth.signIn({
-            email: email,
-            password: password,
-        }, {
-            redirectTo: 'http://localhost:3000/to-do'
+            email,
+            password,
         })
         if(er) error = 'Invalid credentials!';
     }
@@ -50,7 +48,7 @@
 		<div class="card darkgrey text-white h-100">
 		<div class="card-body">
         	<h1 class="mb-5">Log-In</h1>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate on:submit|preventDefault={signIn}>
                 {#if error}
                     <div class="form-group d-block text-center">
                         <div class="text-danger">{error}</div>
@@ -69,7 +67,7 @@
                     </div>
                 </div>
                 <div class="form-group d-block">
-                    <button class="btn btn-blue" type="submit" on:click={signIn}>Sign In</button>
+                    <button class="btn btn-blue" type="submit">Sign In</button>
                 </div>
                 <div class="mx-auto w-50 text-center">
                     <a href="/sign_up">You haven't made an account yet? Sign Up here</a>
