@@ -15,7 +15,7 @@
 
 	if(browser) {
 		$session = supabase.auth.session();
-		setTimeout( () => $session ? goto('/to-do') : goto('/'));
+		setTimeout( () => $session ? goToToDo() : goToToSignIn());
 		supabase.auth.onAuthStateChange((event, sesh) => {
 			$session = sesh;
 			setTimeout( () => $session ? goToToDo() : goToToSignIn());
