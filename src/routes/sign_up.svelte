@@ -35,7 +35,7 @@
         <div class="card-body m-4">
             <h1 class="mb-5">Register</h1>
             <form class="needs-validation" novalidate on:submit|preventDefault={signUp}>
-                <!-- <div class="form-group d-block">
+                <div class="form-group d-block">
                     <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey py-3" placeholder="First Name" required>
                     <div class="valid-feedback">
                         Looks good!
@@ -52,7 +52,7 @@
                     <div class="invalid-feedback">
                         Please fill out this field.
                     </div>
-                </div> -->
+                </div>
                 <div class="form-group d-block">
                     <input bind:value={email} type="email" class="form-control lightgrey py-3" placeholder="Email" required>
                     <div class="valid-feedback">
