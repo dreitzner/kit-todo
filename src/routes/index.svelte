@@ -55,13 +55,13 @@
                     </div>
                 {/if}
                 <div class="form-group d-block">
-                    <input bind:value={email} type="email" class="form-control lightgrey py-3" placeholder="Email" required>
+                    <input bind:value={email} type="email" class="form-control py-3" placeholder="Email" required>
                     <div class="invalid-feedback">
                         Please enter your email adress.
                     </div>
                 </div>
                 <div class="form-group d-block">
-                    <input bind:value={password} type="password" class="form-control lightgrey py-3" placeholder="Password" required>
+                    <input bind:value={password} type="password" class="form-control py-3" placeholder="Password" required>
                     <div class="invalid-feedback">
                         Please enter your password.
                     </div>

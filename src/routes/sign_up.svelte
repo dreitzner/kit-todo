@@ -36,7 +36,7 @@
             <h1 class="mb-5">Register</h1>
             <form class="needs-validation" novalidate on:submit|preventDefault={signUp}>
                 <div class="form-group d-block">
-                    <input bind:value={firstName} type="text" minlength="1" class="form-control lightgrey py-3" placeholder="First Name" required>
+                    <input bind:value={firstName} type="text" minlength="1" class="form-control py-3" placeholder="First Name" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group d-block">
-                    <input bind:value={lastName} type="text" minlength="1" class="form-control lightgrey py-3" placeholder="Last Name" required>
+                    <input bind:value={lastName} type="text" minlength="1" class="form-control py-3" placeholder="Last Name" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="form-group d-block">
-                    <input bind:value={email} type="email" class="form-control lightgrey py-3" placeholder="Email" required>
+                    <input bind:value={email} type="email" class="form-control py-3" placeholder="Email" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="form-group d-block">
-                    <input bind:value={password} type="password" minlength="6" class="form-control lightgrey py-3" placeholder="Password" required>
+                    <input bind:value={password} type="password" minlength="6" class="form-control py-3" placeholder="Password" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
