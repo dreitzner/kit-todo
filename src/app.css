@@ -112,3 +112,7 @@ button:focus:not(:focus-visible) {
 .row{
 	margin: auto 0;
 }
+
+.form-control::placeholder {
+	color: #a3a3a3;
+}

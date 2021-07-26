@@ -58,6 +58,20 @@
             todos: priorityHigh,
         }
     ];
+    import supabase from "$lib/db"
+
+    async function getEntries() {
+        const entries = await supabase.from('entries').select(`*`);
+    }
+
+    /*async function createEntry() {
+        const newEntry = await supabase.from('entries').insert({key:value});
+    }*/
+
+    /*async function updateEntry() {
+        const newEntry = await supabase.from('entries').eq('selector').update({ key: value })
+    }*/
+
 </script>
 
 <div class="row my-2">
