@@ -15,14 +15,15 @@
 
 	if(browser) {
 		$session = supabase.auth.session();
-		setTimeout( () => $session ? goToToDo() : goToToSignIn());
+		setTimeout( () => $session ? goToToDo($session) : goToToSignIn());
 		supabase.auth.onAuthStateChange((event, sesh) => {
 			$session = sesh;
-			setTimeout( () => $session ? goToToDo() : goToToSignIn());
+			setTimeout( () => $session ? goToToDo($session) : goToToSignIn());
 		})
 	}
 
-	function goToToDo() {
+	function goToToDo(session) {
+		sessionStorage.setItem('uid', session.user.id);
 		goto('/to-do');
 		showHeader = '/to-do';
 	}

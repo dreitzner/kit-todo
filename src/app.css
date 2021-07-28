@@ -116,3 +116,13 @@ button:focus:not(:focus-visible) {
 .form-control::placeholder {
 	color: #a3a3a3;
 }
+
+.entrymodal {
+	z-index: 100;
+}
+
+.modal-content {
+	background-color: #2d2d2f;
+	border: none;
+	border-radius: .7rem;
+}

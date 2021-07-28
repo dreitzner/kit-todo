@@ -1,113 +1,92 @@
 <script>
+    import MediaQuery from "svelte-media-query";
     import PriorityColumn from '$lib/components/PriorityColumn.svelte';
-
-    const removeFunction = function(id) {
-        todos = todos.filter(x => x.id !== id);
-    }
-
-    let todos = [
-        {
-            id: "0",
-            todoTitle: "Bugs fixen",
-            todoBody: "Lorem Ipsum",
-            date: "26.07.21",
-            priority: 1,
-            isDone: false,
-        },
-        {
-            id: "1",
-            todoTitle: "Verzweifeln",
-            todoBody: "Lorem Ipsum",
-            date: "27.07.21",
-            priority: 2,      
-            isDone: true,
-        },
-        {
-            id: "2",
-            todoTitle: "Domenik nach Hilfe fragen",
-            todoBody: "Lorem Ipsum",
-            date: "28.07.21",
-            priority: 3,
-            isDone: false,
-        },
-        {
-            id: "3",
-            todoTitle: "Test",
-            todoBody: "Lorem Ipsum",
-            date: "28.07.21",
-            priority: 3,
-            isDone: false,
-        }
-    ];
-    
-    $:priorityLow = todos.filter(x => x.priority == 1) || [];
-    $:priorityMedium = todos.filter(x => x.priority == 2) || [];
-    $:priorityHigh = todos.filter(x => x.priority >= 3) || [];
-    
-    let priorities = [
-        {
-            priority: "High Priority",
-            todos: priorityLow,
-        },
-        {
-            priority: "Medium Priority",
-            todos: priorityMedium,
-        },
-        {
-            priority: "Low Priority",
-            todos: priorityHigh,
-        }
-    ];
     import supabase from "$lib/db"
 
+    getEntries();
+ 
+    let todos = [];
     async function getEntries() {
-        const entries = await supabase.from('entries').select(`*`);
+        let uid;
+        try {
+            uid = sessionStorage.getItem('uid');
+        } catch (error) {
+            console.log("Problem with sessionStorage");
+        }
+        
+        // const entries = await supabase.from('entries').select("*").eq('uid', uid);
+        let { data: entries, error } = await supabase.from('entries').select("*").eq('uid', uid);
+        todos = entries;
+    }
+    
+    $: priorities = [
+        {
+            priorityName: "High Priority",
+            todos: todos.filter(x => x.priority == 1) || [],
+        },
+        {
+            priorityName: "Medium Priority",
+            todos: todos.filter(x => x.priority == 2) || [],
+        },
+        {
+            priorityName: "Low Priority",
+            todos: todos.filter(x => x.priority == 3) || [],
+        }
+    ];
+
+    $: smallPriority = 3;
+    $: smallPriorityName = "High Priority";
+    $: smallTodos = todos.filter(x => x.priority == smallPriority) || [];
+    
+    const removeFunction = async function(id) {
+        //delete
+        const { data, error } = await supabase
+            .from('entries')
+            .delete()
+            .match({ id: id })
+        getEntries();
     }
 
-    /*async function createEntry() {
-        const newEntry = await supabase.from('entries').insert({key:value});
-    }*/
+    function switchPriority() {
+        smallPriority = this.selectedIndex+1;
+        smallPriorityName = this.value;
+    }
 
-    /*async function updateEntry() {
-        const newEntry = await supabase.from('entries').eq('selector').update({ key: value })
-    }*/
-
+    function saveEntry() {
+        getEntries();
+    }
 </script>
 
 <div class="row my-2">
-    <select class="custom-select my-3 dropdown visibleSm">
-        {#each priorities as {priority}}
-            <option value={priority}>
-                {priority}
+    <select class="custom-select my-3 dropdown visibleSm" on:change={switchPriority}>
+        {#each priorities as {priorityName}}
+            <option value={priorityName}>
+                {priorityName}
             </option>
         {/each}
     </select>
-    {#each priorities as {priority, todos}}
-        <PriorityColumn 
-            {priority}
-            {todos}
-            {removeFunction}/>
-    {/each}    
-</div>
+    {#await todos then val}
 
-<div class="modal fade" id="entryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>+
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
+        <MediaQuery query="(max-width: 991.98px)" let:matches>
+            {#if matches}
+                <PriorityColumn 
+                    todos={smallTodos}
+                    priorityName={smallPriorityName}    
+                    {removeFunction}
+                    {saveEntry}
+                />
+            {:else}
+                {#each priorities as {priorityName, todos}}
+                    <PriorityColumn 
+                        {todos}
+                        {priorityName}
+                        {removeFunction}
+                        {saveEntry}
+                    />
+                {/each}
+            {/if}
+        </MediaQuery>
+    {/await}    
 </div>
 
 <style>

@@ -1,17 +1,19 @@
 <script lang="ts">
 	export let id;
-	export let todoTitle = "Title";
-	export let todoBody = "Lorem ipsum, dolor sit amet consectetur adipisicing elit.";
-	export let date = "12.03.22";
+	export let title = "Title";
+	export let description = "Lorem ipsum, dolor sit amet consectetur adipisicing elit.";
+	export let dueDate = "12.12.2012";
+	export let dueTime = "00:00";
 	export let removeFunction;
+	export let updateEntry;
 
 	//for self destruction
 	let nodeRef;
 	let deleteAnim;
-	export let isDone = false;
+	export let completed = false;
 
 	function Taskdone() {
-		isDone = true;
+		completed = true;
 	}
 
 	function deleteTask() {
@@ -22,17 +24,17 @@
 	}
 </script>
 
-<div class="card" class:isDone class:deleteAnim bind:this={nodeRef}>
-	<div class="card-header">
-		<h2>{todoTitle}</h2>
+<div class="card" class:completed class:deleteAnim bind:this={nodeRef}>
+	<div class="card-header" on:click={updateEntry(id, title, description, dueDate, dueTime)}>
+		<h2>{title}</h2>
 	</div>
-	<div class="card-body">
-		{todoBody}
+	<div class="card-body" on:click={updateEntry(id, title, description, dueDate, dueTime)}>
+		{description}
 	</div>
 	<div class="card-footer vcenter-item">
-		<p class="date">Due till: {date}</p>
+		<p class="date">Due till: {dueDate.split('-').reverse().join('.') + " " + dueTime.slice(0, 5)}</p>
 		<div class="options vcenter-item">
-			{#if isDone}
+			{#if completed}
 				<p class="doneInfo">Task Done</p>
 			{:else}
 				<button on:click={Taskdone} class="btn">
@@ -40,7 +42,7 @@
 				</button>
 			{/if}
 			<button on:click={deleteTask} class="btn btn-del">				
-				<img src="{isDone ? '/trashcan_light.svg' : '/trashcan.svg'}" alt="Trashcan">
+				<img src="{completed ? '/trashcan_light.svg' : '/trashcan.svg'}" alt="Trashcan">
 			</button>
 		</div>
 	</div>
@@ -53,7 +55,7 @@
 		border: none;
 	}
 
-	.card.isDone::before {
+	.card.completed::before {
 		content: '';
 		background-color: rgba(0, 0, 0, 0.5);
 		border-radius: 10px;
@@ -64,10 +66,15 @@
 	}
 
 	.card-header {
+		cursor: pointer;
 		border: none;
 		border-radius: 10px 10px 0px 0px;
 		background-color: rgb(221, 221, 221);
 		font-weight: bold;
+	}
+
+	.card-body {
+		cursor: pointer;
 	}
 
 	.card-header h2 {

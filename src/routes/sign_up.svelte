@@ -1,5 +1,4 @@
 <script>
-
     import { onMount } from 'svelte';
     import supabase from "$lib/db"
 
@@ -24,8 +23,16 @@
             email,
             password
         })
+        saveUserData(user.id);
     }
 
+    async function saveUserData(id) {
+        const { data, error } = await supabase
+            .from('userData')
+            .insert([
+                {id, firstName, lastName}
+            ])
+    }
 </script>
 
 <div class="row">
