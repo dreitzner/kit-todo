@@ -79,6 +79,11 @@
 		}
 	}
 
+	function closeModal() {
+		clearModal();
+		resetModal();
+	}
+
 	function resetModalHandler(event) {
 		if (!event.target.closest('.modal-content') && isOpen) resetModal();
 	}
@@ -91,7 +96,7 @@
                 <div class="darkgrey entrymodal m-3">
                     <div class="modal-header">
                         <h5 class="modal-title ml-3 mt-3">{modalTitle}</h5>
-                        <button class="btn" on:click={resetModal}>
+                        <button class="btn" on:click={closeModal}>
                             <img src="/close.svg" alt="Close Modal" />
                         </button>
                     </div>
