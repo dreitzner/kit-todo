@@ -7,24 +7,26 @@
     export let saveEntry;
     let isOpen, id, modalTitle, title, description, dueDate, dueTime;
     let priorities = ["High Priority", "Medium Priority", "Low Priority"];
-    let priority = priorities.indexOf(priorityName) + 1;
-    
+    $: priority = priorities.indexOf(priorityName) + 1;
 
     function resetModal() {
         isOpen = false;
     }
 
     function openModal() {
+        console.log(priorityName);
         isOpen = true;
-        setTimeout(() => {
-            document.querySelector('.modal').addEventListener('click', (event) => {
-                if(!event.target.closest('.modal-content') && isOpen)
-                    resetModal();
-            })
-        }, 500);
+        // setTimeout(() => {
+        //     console.log(document.querySelector('.modal'));
+        //     document.querySelector('.modal').onclick = function(event) {
+        //         if(!event.target.closest('.modal-content') && isOpen)
+        //             resetModal();
+        //     }
+        // }, 500);
     }
 
     function newEntry() {
+        console.log("new Entry " + isOpen);
         modalTitle = "Add New Entry";
         openModal();
     }

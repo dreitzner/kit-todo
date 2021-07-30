@@ -34,10 +34,10 @@
         }
     ];
 
-    $: smallPriority = 3;
-    $: smallPriorityName = "High Priority";
+    let smallPriorityName = "High Priority";
+    $: smallPriority = priorities.findIndex(x => x.priorityName === smallPriorityName) + 1;
     $: smallTodos = todos.filter(x => x.priority == smallPriority) || [];
-    
+
     const removeFunction = async function(id) {
         //delete
         const { data, error } = await supabase
@@ -47,18 +47,13 @@
         getEntries();
     }
 
-    function switchPriority() {
-        smallPriority = this.selectedIndex+1;
-        smallPriorityName = this.value;
-    }
-
     function saveEntry() {
         getEntries();
     }
 </script>
 
 <div class="row my-2">
-    <select class="custom-select my-3 dropdown visibleSm" on:change={switchPriority}>
+    <select class="custom-select my-3 dropdown visibleSm" bind:value={smallPriorityName}>
         {#each priorities as {priorityName}}
             <option value={priorityName}>
                 {priorityName}
@@ -66,12 +61,11 @@
         {/each}
     </select>
     {#await todos then val}
-
         <MediaQuery query="(max-width: 991.98px)" let:matches>
             {#if matches}
                 <PriorityColumn 
                     todos={smallTodos}
-                    priorityName={smallPriorityName}    
+                    priorityName={smallPriorityName}
                     {removeFunction}
                     {saveEntry}
                 />

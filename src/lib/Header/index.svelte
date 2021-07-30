@@ -25,7 +25,7 @@
 				<img class="nav-item" src="/logo.svg" alt="Logo"/>
 			</div>
 			<h2 class="nav-item ml-3 mr-auto align-self-center visibleLg">My To-Do-List</h2>
-			<h2 class="nav-item ml-3 align-self-center visibleLg">Hallo {username}</h2>
+			<h2 class="nav-item ml-3 align-self-center visibleLg">Servus {username}</h2>
 			<a class="nav item ml-3 nav-link align-self-center" href="/" on:click={signOut}>Log-Out</a>
 		</div>
 	</nav>
