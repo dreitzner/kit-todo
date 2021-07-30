@@ -14,25 +14,15 @@
     }
 
     function openModal() {
-        console.log(priorityName);
         isOpen = true;
-        // setTimeout(() => {
-        //     console.log(document.querySelector('.modal'));
-        //     document.querySelector('.modal').onclick = function(event) {
-        //         if(!event.target.closest('.modal-content') && isOpen)
-        //             resetModal();
-        //     }
-        // }, 500);
     }
 
     function newEntry() {
-        console.log("new Entry " + isOpen);
         modalTitle = "Add New Entry";
         openModal();
     }
 
     function updateEntry(entryid, entrytitle, entrydescription, entrydueDate, entrydueTime) {
-        console.log(entryid);
         modalTitle = "Update Entry";
         id = entryid;
         title = entrytitle;

@@ -1,10 +1,11 @@
 <script>
-	import { onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
 	import supabase from '$lib/db';
     import { fly, fade } from 'svelte/transition';
 	export let isOpen, modalTitle;
 	export let resetModal, saveEntry;
 	export let id, title, dueDate, dueTime, description, priority;
+	let isValid = true;
 
 	let priorities = [
 		{
@@ -21,10 +22,36 @@
 		}
 	];
 
+	afterUpdate(() => {
+		if(isOpen) {
+			
+			var forms = document.getElementsByClassName('needs-validation');
+
+			var validation = Array.prototype.filter.call(forms, function (form) {
+				form.addEventListener(
+					'submit',
+					function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						} else {
+							if(isValid) {
+								isValid = false;
+								createOrUpdateEntry();
+							}
+							event.preventDefault();
+						}
+						form.classList.add('was-validated');
+					},
+					false
+				);
+			});
+		}
+	});
+
 	function clearModal() {
 		try {
 			title = '';
-			// dueDate = new Date().toISOString().split('T')[0];
 			dueDate = '';
 			dueTime = '';
 			description = '';
@@ -43,33 +70,18 @@
 		const { data, error } = await supabase
 			.from('entries')
 			.upsert({ id, title, description, priority, dueDate, dueTime, uid });
-		console.log(error);
 
-		saveEntry();
-		clearModal();
+		if(!error){
+			saveEntry();
+			clearModal();
+			resetModal();
+			isValid = true;
+		}
 	}
 
 	function resetModalHandler(event) {
 		if (!event.target.closest('.modal-content') && isOpen) resetModal();
 	}
-
-	onMount(async () => {
-		var forms = document.getElementsByClassName('needs-validation');
-
-		var validation = Array.prototype.filter.call(forms, function (form) {
-			form.addEventListener(
-				'submit',
-				function (event) {
-					if (form.checkValidity() === false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-					form.classList.add('was-validated');
-				},
-				false
-			);
-		});
-	});
 </script>
 
 {#if isOpen}
@@ -83,11 +95,11 @@
                             <img src="/close.svg" alt="Close Modal" />
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form class="needs-validation" novalidate>
+					<form class="needs-validation" novalidate>
+                    	<div class="modal-body">
                             <div class="row">
                                 <div class="form-group col-12 col-sm-6">
-                                    <input bind:value={title} type="text" minlength="1" class="form-control" placeholder="Title"/>
+                                    <input bind:value={title} type="text" minlength="1" class="form-control" placeholder="Title" required/>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
                                 <div class="form-group col-12 col-sm-6">
@@ -107,6 +119,7 @@
                                         minlength="1"
                                         class="form-control"
                                         placeholder="Description"
+										required
                                     />
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -117,25 +130,25 @@
                                             min={new Date().toISOString().split('T')[0]}
                                             type="date"
                                             class="form-control"
+											required
                                         />
                                         <div class="invalid-feedback">Please pick a valid date!</div>
                                     </div>
                                     <div class="form-group">
-                                        <input bind:value={dueTime} type="time" class="form-control" />
+                                        <input bind:value={dueTime} type="time" class="form-control" required/>
                                         <div class="invalid-feedback">Please pick a valid time!</div>
                                     </div>
-                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn" on:click={createOrUpdateEntry} on:click={resetModal}>
-                            <img src="/check_light.svg" alt="Save Changes" />
-                        </button>
-                        <button type="button" class="btn" on:click={clearModal}>
-                            <img src="/trashcan.svg" alt="Remove Changes" />
-                        </button>
-                    </div>
+							<div class="modal-footer">
+								<button type="submit" class="btn">
+									<img src="/check_light.svg" alt="Save Changes" />
+								</button>
+								<button type="button" class="btn" on:click={clearModal}>
+									<img src="/trashcan.svg" alt="Remove Changes" />
+								</button>
+							</div>
+                    	</div>
+					</form>
                 </div>
             </div>
         </div>

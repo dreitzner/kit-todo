@@ -14,8 +14,7 @@
         const { user, session, error } = await supabase.auth.signIn({
             email: email,
             password: password,
-        }) 
-        console.log(user);
+        })
     }
 </script>
 
